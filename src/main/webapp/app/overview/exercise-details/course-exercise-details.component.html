@@ -143,7 +143,7 @@
             >
             </jhi-complaint-interactions>
         </div>
-        <div class="col-sm-12 col-md-4 col-lg-4" jhiIdeFilter [showInIDE]="false">
+        <div class="col-sm-12 col-md-4 col-lg-4" jhiIdeFilter [showInIDE]="false" *ngIf="course && course.qnaEnabled">
             <jhi-student-questions [exercise]="exercise"></jhi-student-questions>
         </div>
     </div>
