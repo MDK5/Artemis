@@ -2,7 +2,7 @@ import { Component, DoCheck, Input, IterableDiffers, OnChanges, SimpleChanges } 
 import { Feedback } from 'app/entities/feedback/feedback.model';
 import { HighlightColors } from 'app/text-assessment/highlight-colors';
 import { TextBlock } from 'app/entities/text-block/text-block.model';
-import { escapeString, convertToHtmlLinebreaks, sanitize } from 'app/utils/text.utils';
+import { convertToHtmlLinebreaks, escapeString, sanitize } from 'app/utils/text.utils';
 
 @Component({
     selector: 'jhi-highlighted-text-area',
