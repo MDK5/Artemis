@@ -7,11 +7,13 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
+import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.test.context.support.WithMockUser;
@@ -35,7 +37,7 @@ public class ManagementResourceIntegrationTest extends AbstractSpringIntegration
     @Autowired
     AuditEventService auditEventService;
 
-    @Autowired
+    @SpyBean
     PersistenceAuditEventRepository persistenceAuditEventRepository;
 
     @Autowired
@@ -43,9 +45,12 @@ public class ManagementResourceIntegrationTest extends AbstractSpringIntegration
 
     private PersistentAuditEvent persAuditEvent;
 
+    private List<PersistentAuditEvent> persEvents;
+
     @BeforeEach
     public void initTestCase() {
         database.addUsers(2, 0, 0);
+        persEvents = persistenceAuditEventRepository.findAll();
         persistenceAuditEventRepository.deleteAll();
         persAuditEvent = new PersistentAuditEvent();
         persAuditEvent.setPrincipal("student1");
@@ -67,6 +72,7 @@ public class ManagementResourceIntegrationTest extends AbstractSpringIntegration
     @AfterEach
     public void tearDown() {
         database.resetDatabase();
+        persistenceAuditEventRepository.saveAll(persEvents);
     }
 
     @Test
