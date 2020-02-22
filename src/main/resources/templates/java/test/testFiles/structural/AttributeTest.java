@@ -156,7 +156,7 @@ public class AttributeTest extends StructuralTest {
             boolean enumValueExists = false;
             for(Object observedEnumValue : observedEnumValues) {
 
-                if(expectedEnumValue.equals(observedEnumValue.toString())) {
+                if (expectedEnumValue.equals(((Class<Enum>) observedClass).cast(observedEnumValue).name())) {
                     enumValueExists = true;
                     break;
                 }
